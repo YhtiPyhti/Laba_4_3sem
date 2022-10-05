@@ -25,6 +25,10 @@ public:
 
     friend istream& operator>>(istream& is,Stock& quotes) {
         is >> quotes.aeroflot >> quotes.gazprom >> quotes.mts;
+        if (is.fail()) {
+            cout << "\nIncorrect input!!!\n";
+            exit(1);
+        }
         return is;
     }
 
