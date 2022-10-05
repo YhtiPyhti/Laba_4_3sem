@@ -1,15 +1,7 @@
 ﻿#include "Birga.h"
 
-static double MAX_VALUE = 1.7976931348623157E308;
-
-void showStockQuotes(Stock& quotes) {
-    cout << "Aeroflot: " << quotes.aeroflot << " rub.\n";
-    cout << "GAZPROM: " << quotes.gazprom << " rub.\n";
-    cout << "MTS: " << quotes.mts << " rub.\n";
-    cout << "VTB: " << quotes.getVtb() << " rub.\n";
-    cout << "Sberbank: " << getSberbank(quotes) << " rub.\n";
-
-}
+const double MAX_VALUE = 1.7976931348623157E308;
+const string PASSWORD = "111";
 
 void replaceValue(Stock& quotes, string choice) {
     double replacement;
@@ -31,34 +23,43 @@ void replaceValue(Stock& quotes, string choice) {
 }
 
 void menu(Stock& quotes) {
-    string choice;
+    string choice, user_pass;
     while (true)
     {
         cout << "\nWhat do you need?\n1)Show stock quotes\n2)Replace value\n3)Exit\n";
         cin >> choice;
         if (choice == "1") {
             system("cls");
-            showStockQuotes(quotes);
+            cout << quotes;
         }
         else if (choice == "2") {
-            while (true)
-            {
-                cout << "\n1)VTB\n2)Sberbank\n";
-                cin >> choice;
+            cout << "\nProcedure for entering data: Aeroflot  GAZPROM  MTS\n";
+            cin >> quotes;
+            cout << "\nIf you want to continue, enter the password( " << PASSWORD <<" ): ";
+            cin >> user_pass;
+            if (user_pass == PASSWORD) {
+                while (true)
+                {
+                    cout << "\n1)VTB\n2)Sberbank\n";
+                    cin >> choice;
 
-                if (choice != "1" && choice != "2") {
-                    cout << "\nIncorrect input!!!\n";
-                    choice.clear();
-                    system("cls");
+                    if (choice != "1" && choice != "2") {
+                        cout << "\nIncorrect input!!!\n";
+                        choice.clear();
+                        system("cls");
+                    }
+                    else break;
                 }
-                else break;
-            }
 
-            system("cls");
-            replaceValue(quotes, choice);
+                system("cls");
+                replaceValue(quotes, choice);
+            }
+            else cout << "\nIncorrect input!!!\n";
 
         }
         else if (choice == "3") {
+            system("cls");
+            cout << "\nGoodbuy\n";
             exit(1);
         }
         else {
@@ -74,6 +75,6 @@ void menu(Stock& quotes) {
 int main(){
 
     Stock quotes;
-
     menu(quotes);
+
 }

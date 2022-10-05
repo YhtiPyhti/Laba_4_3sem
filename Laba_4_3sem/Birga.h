@@ -14,6 +14,20 @@ public:
         sberbank = 110.83;
     }
 
+    friend ostream& operator<<(ostream& os, const Stock& quotes) {
+        os << "Aeroflot: " << quotes.aeroflot << " rub.\n";
+        os << "GAZPROM: " << quotes.gazprom << " rub.\n";
+        os << "MTS: " << quotes.mts << " rub.\n";
+        os << "VTB: " << quotes.vtb << " rub.\n";
+        os << "Sberbank: " << quotes.sberbank << " rub.\n";
+        return os;
+    }
+
+    friend istream& operator>>(istream& is,Stock& quotes) {
+        is >> quotes.aeroflot >> quotes.gazprom >> quotes.mts;
+        return is;
+    }
+
     const double getVtb();
 
     void setVtb(double a);
